@@ -1,7 +1,7 @@
 FROM alpine:3.12.1
 
-RUN apk install epel-release
-RUN apk install tcpdump sudo libaio-devel leveldb-devel snappy-devel libcap-devel libseccomp-devel \
+RUN apk add epel-release
+RUN apk add tcpdump sudo libaio-devel leveldb-devel snappy-devel libcap-devel libseccomp-devel \
     gcc-c++ make git golang jq which openssl
 
 ENV GOPATH=/go
