@@ -1,8 +1,10 @@
 FROM golang:alpine3.12
 
-#RUN apk add epel-release
-RUN apk add tcpdump sudo libaio-dev leveldb-dev snappy-dev libcap-dev libseccomp-dev \
-    g++ glib make git jq which openssl libexecinfo-dev && \
+MAINTAINER rskjetlein@netrunner.nu
+
+RUN apk add tcpdump sudo libaio-dev leveldb-dev snappy-dev libcap-dev \
+    libseccomp-dev g++ gcc glib make git jq which openssl libexecinfo-dev \
+    argp-standalone && \
     wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
     wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.32-r0/glibc-2.32-r0.apk && \
     apk add glibc-2.32-r0.apk
