@@ -5,7 +5,8 @@ MAINTAINER rskjetlein@netrunner.nu
 RUN apt update && \
     apt install -y \
     tcpdump sudo libaio-dev libleveldb-dev libsnappy-dev libcap-dev \
-    libcap2-bin libseccomp-dev gcc make git golang jq openssl
+    libcap2-bin libseccomp-dev gcc make git golang jq openssl \
+    net-tools
 
 ENV GOPATH=/go
 
