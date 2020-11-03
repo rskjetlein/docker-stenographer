@@ -1,13 +1,11 @@
-FROM golang:alpine3.12
+FROM ubuntu:18.04
 
 MAINTAINER rskjetlein@netrunner.nu
 
-RUN apk add tcpdump sudo libaio-dev leveldb-dev snappy-dev libcap-dev \
-    libseccomp-dev g++ gcc glib make git jq which openssl libexecinfo-dev \
-    argp-standalone && \
-    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
-    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.32-r0/glibc-2.32-r0.apk && \
-    apk add glibc-2.32-r0.apk
+RUN apt update && \
+    apt install -y \
+    tcpdump sudo libaio-dev libleveldb-dev libsnappy-dev libcap-dev \
+    libcap2-bin libseccomp-dev gcc make git golang jq openssl
 
 ENV GOPATH=/go
 
@@ -15,7 +13,7 @@ RUN go get github.com/google/stenographer && \
     cd /go/src/github.com/google/stenographer && \
     go build && \
     make -C stenotype && \
-    adduser --system --no-create-home stenographer && \
+    adduser --system --group --no-create-home stenographer && \
     mkdir /etc/stenographer \
           /etc/stenographer/certs \
           /data /data/stenographer \
