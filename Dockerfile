@@ -15,8 +15,8 @@ RUN go get github.com/google/stenographer && \
     go build && \
     make -C stenotype && \
     adduser --system --group --no-create-home stenographer && \
-    #mkdir /etc/stenographer \
-    #      /etc/stenographer/certs \
+    mkdir /etc/stenographer \
+          /etc/stenographer/certs \
           /data /data/stenographer \
           /data/stenographer/logs \
           /data/stenographer/index && \
