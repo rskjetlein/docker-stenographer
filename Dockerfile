@@ -1,12 +1,12 @@
-FROM ubuntu:18.04
+FROM centos:latest
 
 MAINTAINER rskjetlein@netrunner.nu
 
-RUN apt update && \
-    apt install -y \
-    tcpdump sudo libaio-dev libleveldb-dev libsnappy-dev libcap-dev \
-    libcap2-bin libseccomp-dev gcc make git golang jq openssl \
-    net-tools curl tshark
+RUN yum -y install epel-release
+RUN yum install -y yum-utils && yum-config-manager --enable PowerTools
+RUN yum install -y tcpdump sudo libaio-devel leveldb-devel snappy-devel \
+    libcap-devel libseccomp-devel gcc-c++ make git golang jq which openssl \
+    wireshark
 
 ENV GOPATH=/go
 
@@ -14,7 +14,7 @@ RUN go get github.com/google/stenographer && \
     cd /go/src/github.com/google/stenographer && \
     go build && \
     make -C stenotype && \
-    adduser --system --group --no-create-home stenographer && \
+    adduser --system --no-create-home stenographer && \
     mkdir /etc/stenographer \
           /etc/stenographer/certs \
           /data /data/stenographer \
